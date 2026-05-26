@@ -33,12 +33,15 @@
   .stock-item {
     background: #fff; border-radius: 10px; padding: 12px 14px; margin-bottom: 6px;
     display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    cursor: pointer; transition: background 0.15s;
   }
-  .stock-item .info { flex: 1; }
+  .stock-item:active { background: #f0f2f5; }
+  .stock-item .info { flex: 1; min-width: 0; }
   .stock-item .name { font-weight: 600; font-size: 14px; }
   .stock-item .code { font-size: 11px; color: #aaa; font-weight: 400; }
   .stock-item .price { font-size: 12px; color: #888; }
-  .stock-item .change { font-weight: 700; font-size: 15px; text-align: right; white-space: nowrap; }
+  .stock-item .right-col { text-align: right; margin-left: 10px; }
+  .stock-item .change { font-weight: 700; font-size: 14px; }
   .stock-item .change.up { color: #e74c3c; }
   .stock-item .change.down { color: #27ae60; }
   .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 4px; }
@@ -56,6 +59,53 @@
   }
   .expand-btn:hover { background: #1a5276; }
   .expand-btn:active { background: #0c2748; }
+
+  /* 评分徽章 */
+  .score-high { font-size: 11px; font-weight: 700; color: #1a8c1a; margin-top: 2px; }
+  .score-mid { font-size: 11px; font-weight: 700; color: #e68a00; margin-top: 2px; }
+  .score-low { font-size: 11px; font-weight: 700; color: #999; margin-top: 2px; }
+  .score-none { font-size: 11px; font-weight: 400; color: #ccc; margin-top: 2px; }
+
+  /* 弹窗遮罩 */
+  .modal-overlay {
+    display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); animation: fadeIn 0.2s;
+  }
+  .modal-overlay.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal-box {
+    position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000;
+    background: #fff; border-radius: 16px 16px 0 0; padding: 20px 20px 30px;
+    animation: slideUp 0.25s ease; max-height: 80vh; overflow-y: auto;
+  }
+  .modal-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 14px; }
+  .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .modal-code { font-size: 12px; color: #888; margin-bottom: 12px; }
+  .modal-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .modal-price { font-size: 28px; font-weight: 700; }
+  .modal-chg { font-size: 16px; font-weight: 600; }
+  .modal-chg.up { color: #e74c3c; }
+  .modal-chg.down { color: #27ae60; }
+  .modal-score { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 700; }
+  .modal-score.high { background: #e6f5e6; color: #1a8c1a; }
+  .modal-score.mid { background: #fff3e0; color: #e68a00; }
+  .modal-score.low { background: #f5f5f5; color: #999; }
+  .modal-score.none { background: #f9f9f9; color: #ccc; }
+  .modal-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 14px 0; }
+  .modal-stat { background: #f8f9fa; border-radius: 8px; padding: 10px; text-align: center; }
+  .modal-stat .val { font-size: 16px; font-weight: 700; }
+  .modal-stat .val.up { color: #e74c3c; }
+  .modal-stat .val.down { color: #27ae60; }
+  .modal-stat .lbl { font-size: 11px; color: #888; margin-top: 2px; }
+  .modal-reason { background: #f8f9fa; border-radius: 8px; padding: 12px; font-size: 13px; color: #555; line-height: 1.7; margin-top: 10px; }
+  .modal-reason strong { color: #333; }
+  .modal-close {
+    display: block; width: 100%; padding: 12px; margin-top: 14px;
+    background: #f0f2f5; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; color: #333; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .modal-close:active { background: #e0e2e5; }
   .footer { text-align: center; font-size: 11px; color: #aaa; margin-top: 24px; padding: 16px; border-top: 1px solid #eee; }
 </style>
 </head>
@@ -93,25 +143,40 @@
 <div class="section">
   <div class="section-title">🏆 涨幅前5</div>
   <ul class="stock-list">
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('000725')">
       <div class="info"><div class="name">京东方A</div><div class="price">5.77 元</div></div>
-      <div class="change up">+9.49% ▲</div>
+      <div class="right-col">
+        <div class="change up">+9.49% ▲</div>
+        <div class="score-mid">27.6</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('601899')">
       <div class="info"><div class="name">紫金矿业</div><div class="price">32.90 元</div></div>
-      <div class="change up">+4.94% ▲</div>
+      <div class="right-col">
+        <div class="change up">+4.94% ▲</div>
+        <div class="score-low">14.0</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('000100')">
       <div class="info"><div class="name">TCL科技</div><div class="price">4.65 元</div></div>
-      <div class="change up">+4.73% ▲</div>
+      <div class="right-col">
+        <div class="change up">+4.73% ▲</div>
+        <div class="score-mid">23.8</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk09999')">
       <div class="info"><div class="name">网易</div><div class="price">189.30 港元</div></div>
-      <div class="change up">+4.30% ▲</div>
+      <div class="right-col">
+        <div class="change up">+4.30% ▲</div>
+        <div class="score-none">3.4</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk01211')">
       <div class="info"><div class="name">比亚迪股份</div><div class="price">93.65 港元</div></div>
-      <div class="change up">+2.24% ▲</div>
+      <div class="right-col">
+        <div class="change up">+2.24% ▲</div>
+        <div class="score-none">1.8</div>
+      </div>
     </li>
   </ul>
 </div>
@@ -119,25 +184,40 @@
 <div class="section">
   <div class="section-title">📉 跌幅前5</div>
   <ul class="stock-list">
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk03690')">
       <div class="info"><div class="name">美团</div><div class="price">78.80 港元</div></div>
-      <div class="change down">-3.13% ▼</div>
+      <div class="right-col">
+        <div class="change down">-3.13% ▼</div>
+        <div class="score-none">-2.5</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk09618')">
       <div class="info"><div class="name">京东集团</div><div class="price">118.60 港元</div></div>
-      <div class="change down">-2.55% ▼</div>
+      <div class="right-col">
+        <div class="change down">-2.55% ▼</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk06618')">
       <div class="info"><div class="name">京东健康</div><div class="price">39.62 港元</div></div>
-      <div class="change down">-2.37% ▼</div>
+      <div class="right-col">
+        <div class="change down">-2.37% ▼</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk06098')">
       <div class="info"><div class="name">碧桂园服务</div><div class="price">5.92 港元</div></div>
-      <div class="change down">-2.31% ▼</div>
+      <div class="right-col">
+        <div class="change down">-2.31% ▼</div>
+        <div class="score-none">-0.8</div>
+      </div>
     </li>
-    <li class="stock-item">
+    <li class="stock-item" onclick="showStock('hk06862')">
       <div class="info"><div class="name">海底捞</div><div class="price">12.65 港元</div></div>
-      <div class="change down">-2.09% ▼</div>
+      <div class="right-col">
+        <div class="change down">-2.09% ▼</div>
+        <div class="score-none">-1.7</div>
+      </div>
     </li>
   </ul>
 </div>
@@ -151,165 +231,285 @@
 <div class="section">
   <div class="section-title">📋 全部自选股 (40只 · 评分排序)</div>
   <ul class="stock-list" id="fullList">
-    <li class="stock-item" data-index="0">
+    <li class="stock-item" onclick="showStock('000725')">
       <div class="info"><div class="name">京东方A <span class="code">000725</span></div><div class="price">5.77 元</div></div>
-      <div class="change up">+9.49%</div>
+      <div class="right-col">
+        <div class="change up">+9.49%</div>
+        <div class="score-mid">27.6</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="1">
+    <li class="stock-item" onclick="showStock('000100')">
       <div class="info"><div class="name">TCL科技 <span class="code">000100</span></div><div class="price">4.65 元</div></div>
-      <div class="change up">+4.73%</div>
+      <div class="right-col">
+        <div class="change up">+4.73%</div>
+        <div class="score-mid">23.8</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="2">
+    <li class="stock-item" onclick="showStock('601899')">
       <div class="info"><div class="name">紫金矿业 <span class="code">601899</span></div><div class="price">32.90 元</div></div>
-      <div class="change up">+4.94%</div>
+      <div class="right-col">
+        <div class="change up">+4.94%</div>
+        <div class="score-low">14.0</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="3">
+    <li class="stock-item" onclick="showStock('300059')">
       <div class="info"><div class="name">东方财富 <span class="code">300059</span></div><div class="price">20.05 元</div></div>
-      <div class="change up">+0.91%</div>
+      <div class="right-col">
+        <div class="change up">+0.91%</div>
+        <div class="score-low">11.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="4">
+    <li class="stock-item" onclick="showStock('601398')">
       <div class="info"><div class="name">工商银行 <span class="code">601398</span></div><div class="price">7.18 元</div></div>
-      <div class="change up">+0.14%</div>
+      <div class="right-col">
+        <div class="change up">+0.14%</div>
+        <div class="score-low">10.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="5">
+    <li class="stock-item" onclick="showStock('600030')">
       <div class="info"><div class="name">中信证券 <span class="code">600030</span></div><div class="price">26.21 元</div></div>
-      <div class="change up">+0.08%</div>
+      <div class="right-col">
+        <div class="change up">+0.08%</div>
+        <div class="score-low">10.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="6">
+    <li class="stock-item" onclick="showStock('hk09999')">
       <div class="info"><div class="name">网易 <span class="code">hk09999</span></div><div class="price">189.30 港元</div></div>
-      <div class="change up">+4.30%</div>
+      <div class="right-col">
+        <div class="change up">+4.30%</div>
+        <div class="score-none">3.4</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="7">
+    <li class="stock-item" onclick="showStock('hk01211')">
       <div class="info"><div class="name">比亚迪股份 <span class="code">hk01211</span></div><div class="price">93.65 港元</div></div>
-      <div class="change up">+2.24%</div>
+      <div class="right-col">
+        <div class="change up">+2.24%</div>
+        <div class="score-none">1.8</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="8">
+    <li class="stock-item" onclick="showStock('hk02628')">
       <div class="info"><div class="name">中国人寿H <span class="code">hk02628</span></div><div class="price">29.42 港元</div></div>
-      <div class="change up">+1.73%</div>
+      <div class="right-col">
+        <div class="change up">+1.73%</div>
+        <div class="score-none">1.4</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="9">
+    <li class="stock-item" onclick="showStock('hk00005')">
       <div class="info"><div class="name">汇丰控股 <span class="code">hk00005</span></div><div class="price">145.50 港元</div></div>
-      <div class="change up">+1.11%</div>
+      <div class="right-col">
+        <div class="change up">+1.11%</div>
+        <div class="score-none">0.9</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="10">
+    <li class="stock-item" onclick="showStock('hk01109')">
       <div class="info"><div class="name">华润置地 <span class="code">hk01109</span></div><div class="price">35.28 港元</div></div>
-      <div class="change up">+1.09%</div>
+      <div class="right-col">
+        <div class="change up">+1.09%</div>
+        <div class="score-none">0.9</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="11">
+    <li class="stock-item" onclick="showStock('hk00857')">
       <div class="info"><div class="name">中国石油H <span class="code">hk00857</span></div><div class="price">10.91 港元</div></div>
-      <div class="change up">+0.74%</div>
+      <div class="right-col">
+        <div class="change up">+0.74%</div>
+        <div class="score-none">0.6</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="12">
+    <li class="stock-item" onclick="showStock('hk09922')">
       <div class="info"><div class="name">九毛九 <span class="code">hk09922</span></div><div class="price">1.54 港元</div></div>
-      <div class="change up">+0.65%</div>
+      <div class="right-col">
+        <div class="change up">+0.65%</div>
+        <div class="score-none">0.5</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="13">
+    <li class="stock-item" onclick="showStock('hk02015')">
       <div class="info"><div class="name">理想汽车 <span class="code">hk02015</span></div><div class="price">62.15 港元</div></div>
-      <div class="change up">+0.57%</div>
+      <div class="right-col">
+        <div class="change up">+0.57%</div>
+        <div class="score-none">0.5</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="14">
+    <li class="stock-item" onclick="showStock('hk09988')">
       <div class="info"><div class="name">阿里巴巴 <span class="code">hk09988</span></div><div class="price">127.60 港元</div></div>
-      <div class="change up">+0.47%</div>
+      <div class="right-col">
+        <div class="change up">+0.47%</div>
+        <div class="score-none">0.4</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="15">
+    <li class="stock-item" onclick="showStock('hk09888')">
       <div class="info"><div class="name">百度集团 <span class="code">hk09888</span></div><div class="price">128.00 港元</div></div>
-      <div class="change down">-0.16%</div>
+      <div class="right-col">
+        <div class="change down">-0.16%</div>
+        <div class="score-none">0.2</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="16">
+    <li class="stock-item" onclick="showStock('hk00941')">
       <div class="info"><div class="name">中国移动 <span class="code">hk00941</span></div><div class="price">85.60 港元</div></div>
-      <div class="change up">+0.12%</div>
+      <div class="right-col">
+        <div class="change up">+0.12%</div>
+        <div class="score-none">0.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="17">
+    <li class="stock-item" onclick="showStock('hk02020')">
       <div class="info"><div class="name">安踏体育 <span class="code">hk02020</span></div><div class="price">75.25 港元</div></div>
-      <div class="change up">+0.13%</div>
+      <div class="right-col">
+        <div class="change up">+0.13%</div>
+        <div class="score-none">-0.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="18">
+    <li class="stock-item" onclick="showStock('hk00066')">
       <div class="info"><div class="name">港铁公司 <span class="code">hk00066</span></div><div class="price">33.06 港元</div></div>
-      <div class="change down">-0.12%</div>
+      <div class="right-col">
+        <div class="change down">-0.12%</div>
+        <div class="score-none">-0.1</div>
+      </div>
     </li>
-    <li class="stock-item" data-index="19">
+    <li class="stock-item" onclick="showStock('hk01928')">
       <div class="info"><div class="name">金沙中国 <span class="code">hk01928</span></div><div class="price">15.10 港元</div></div>
-      <div class="change down">-0.26%</div>
+      <div class="right-col">
+        <div class="change down">-0.26%</div>
+        <div class="score-none">-0.2</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="20">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00006')">
       <div class="info"><div class="name">电能实业 <span class="code">hk00006</span></div><div class="price">61.60 港元</div></div>
-      <div class="change down">-1.46%</div>
+      <div class="right-col">
+        <div class="change down">-1.46%</div>
+        <div class="score-none">-0.2</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="21">
+    <li class="stock-item" style="display:none" onclick="showStock('hk02318')">
       <div class="info"><div class="name">中国平安H <span class="code">hk02318</span></div><div class="price">60.65 港元</div></div>
-      <div class="change down">-0.33%</div>
+      <div class="right-col">
+        <div class="change down">-0.33%</div>
+        <div class="score-none">-0.3</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="22">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00700')">
       <div class="info"><div class="name">腾讯控股 <span class="code">hk00700</span></div><div class="price">439.00 港元</div></div>
-      <div class="change down">-0.54%</div>
+      <div class="right-col">
+        <div class="change down">-0.54%</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="23">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00027')">
       <div class="info"><div class="name">银河娱乐 <span class="code">hk00027</span></div><div class="price">31.62 港元</div></div>
-      <div class="change down">-0.63%</div>
+      <div class="right-col">
+        <div class="change down">-0.63%</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="24">
+    <li class="stock-item" style="display:none" onclick="showStock('hk06618')">
       <div class="info"><div class="name">京东健康 <span class="code">hk06618</span></div><div class="price">39.62 港元</div></div>
-      <div class="change down">-2.37%</div>
+      <div class="right-col">
+        <div class="change down">-2.37%</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="25">
+    <li class="stock-item" style="display:none" onclick="showStock('hk09618')">
       <div class="info"><div class="name">京东集团 <span class="code">hk09618</span></div><div class="price">118.60 港元</div></div>
-      <div class="change down">-2.55%</div>
+      <div class="right-col">
+        <div class="change down">-2.55%</div>
+        <div class="score-none">-0.4</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="26">
+    <li class="stock-item" style="display:none" onclick="showStock('hk03988')">
       <div class="info"><div class="name">中国银行H <span class="code">hk03988</span></div><div class="price">5.20 港元</div></div>
-      <div class="change down">-0.57%</div>
+      <div class="right-col">
+        <div class="change down">-0.57%</div>
+        <div class="score-none">-0.5</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="27">
+    <li class="stock-item" style="display:none" onclick="showStock('hk01810')">
       <div class="info"><div class="name">小米集团 <span class="code">hk01810</span></div><div class="price">29.76 港元</div></div>
-      <div class="change down">-0.80%</div>
+      <div class="right-col">
+        <div class="change down">-0.80%</div>
+        <div class="score-none">-0.6</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="28">
+    <li class="stock-item" style="display:none" onclick="showStock('hk09866')">
       <div class="info"><div class="name">蔚来 <span class="code">hk09866</span></div><div class="price">42.36 港元</div></div>
-      <div class="change down">-0.98%</div>
+      <div class="right-col">
+        <div class="change down">-0.98%</div>
+        <div class="score-none">-0.8</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="29">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00175')">
       <div class="info"><div class="name">吉利汽车 <span class="code">hk00175</span></div><div class="price">19.26 港元</div></div>
-      <div class="change down">-0.98%</div>
+      <div class="right-col">
+        <div class="change down">-0.98%</div>
+        <div class="score-none">-0.8</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="30">
+    <li class="stock-item" style="display:none" onclick="showStock('hk01398')">
       <div class="info"><div class="name">工商银行H <span class="code">hk01398</span></div><div class="price">6.78 港元</div></div>
-      <div class="change down">-1.02%</div>
+      <div class="right-col">
+        <div class="change down">-1.02%</div>
+        <div class="score-none">-0.8</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="31">
+    <li class="stock-item" style="display:none" onclick="showStock('hk06098')">
       <div class="info"><div class="name">碧桂园服务 <span class="code">hk06098</span></div><div class="price">5.92 港元</div></div>
-      <div class="change down">-2.31%</div>
+      <div class="right-col">
+        <div class="change down">-2.31%</div>
+        <div class="score-none">-0.8</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="32">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00728')">
       <div class="info"><div class="name">中国电信 <span class="code">hk00728</span></div><div class="price">5.33 港元</div></div>
-      <div class="change down">-1.11%</div>
+      <div class="right-col">
+        <div class="change down">-1.11%</div>
+        <div class="score-none">-0.9</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="33">
+    <li class="stock-item" style="display:none" onclick="showStock('hk02331')">
       <div class="info"><div class="name">李宁 <span class="code">hk02331</span></div><div class="price">18.09 港元</div></div>
-      <div class="change down">-1.15%</div>
+      <div class="right-col">
+        <div class="change down">-1.15%</div>
+        <div class="score-none">-0.9</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="34">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00003')">
       <div class="info"><div class="name">香港中华煤气 <span class="code">hk00003</span></div><div class="price">7.19 港元</div></div>
-      <div class="change down">-1.51%</div>
+      <div class="right-col">
+        <div class="change down">-1.51%</div>
+        <div class="score-none">-1.2</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="35">
+    <li class="stock-item" style="display:none" onclick="showStock('hk00883')">
       <div class="info"><div class="name">中国海洋石油 <span class="code">hk00883</span></div><div class="price">26.92 港元</div></div>
-      <div class="change down">-1.90%</div>
+      <div class="right-col">
+        <div class="change down">-1.90%</div>
+        <div class="score-none">-1.5</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="36">
+    <li class="stock-item" style="display:none" onclick="showStock('hk01299')">
       <div class="info"><div class="name">友邦保险 <span class="code">hk01299</span></div><div class="price">84.30 港元</div></div>
-      <div class="change down">-2.03%</div>
+      <div class="right-col">
+        <div class="change down">-2.03%</div>
+        <div class="score-none">-1.6</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="37">
+    <li class="stock-item" style="display:none" onclick="showStock('hk06862')">
       <div class="info"><div class="name">海底捞 <span class="code">hk06862</span></div><div class="price">12.65 港元</div></div>
-      <div class="change down">-2.09%</div>
+      <div class="right-col">
+        <div class="change down">-2.09%</div>
+        <div class="score-none">-1.7</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="38">
+    <li class="stock-item" style="display:none" onclick="showStock('hk03690')">
       <div class="info"><div class="name">美团 <span class="code">hk03690</span></div><div class="price">78.80 港元</div></div>
-      <div class="change down">-3.13%</div>
+      <div class="right-col">
+        <div class="change down">-3.13%</div>
+        <div class="score-none">-2.5</div>
+      </div>
     </li>
-    <li class="stock-item" style="display:none" data-index="39">
+    <li class="stock-item" style="display:none" onclick="showStock('002027')">
       <div class="info"><div class="name">分众传媒 <span class="code">002027</span></div><div class="price">5.53 元</div></div>
-      <div class="change up">+0.36%</div>
+      <div class="right-col">
+        <div class="change up">+0.36%</div>
+        <div class="score-none">-9.7</div>
+      </div>
     </li>
   </ul>
   <div class="expand-wrap">
@@ -324,9 +524,677 @@
   <a href="https://github.com/tianhao0079/daily-briefing">📊 Hermes 智能投研</a>
 </div>
 
+<!-- 弹窗 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-box" id="modalBox" style="display:none;"></div>
+
 <script>
+var stockData = {
+  {
+  code: '000725',
+  name: '京东方A',
+  price: 5.77,
+  chg_pct: 9.49,
+  unit: '元',
+  score: 27.6,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 5.27,
+  return_pct: 9.49,
+  high: 5.77,
+  low: 5.27
+},
+  {
+  code: '601899',
+  name: '紫金矿业',
+  price: 32.9,
+  chg_pct: 4.94,
+  unit: '元',
+  score: 14.0,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 31.35,
+  return_pct: 4.94,
+  high: 32.9,
+  low: 31.35
+},
+  {
+  code: '000100',
+  name: 'TCL科技',
+  price: 4.65,
+  chg_pct: 4.73,
+  unit: '元',
+  score: 23.8,
+  sector: '面板',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 4.44,
+  return_pct: 4.73,
+  high: 4.68,
+  low: 4.44
+},
+  {
+  code: 'hk09999',
+  name: '网易',
+  price: 189.3,
+  chg_pct: 4.3,
+  unit: '港元',
+  score: 3.4,
+  sector: '互联网',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 181.5,
+  return_pct: 4.3,
+  high: 189.3,
+  low: 181.5
+},
+  {
+  code: 'hk01211',
+  name: '比亚迪股份',
+  price: 93.65,
+  chg_pct: 2.24,
+  unit: '港元',
+  score: 1.8,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 91.6,
+  return_pct: 2.24,
+  high: 94.65,
+  low: 91.6
+},
+  {
+  code: 'hk02628',
+  name: '中国人寿H',
+  price: 29.42,
+  chg_pct: 1.73,
+  unit: '港元',
+  score: 1.4,
+  sector: '保险',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 28.92,
+  return_pct: 1.73,
+  high: 29.72,
+  low: 28.92
+},
+  {
+  code: 'hk00005',
+  name: '汇丰控股',
+  price: 145.5,
+  chg_pct: 1.11,
+  unit: '港元',
+  score: 0.9,
+  sector: '银行',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 143.9,
+  return_pct: 1.11,
+  high: 145.5,
+  low: 143.9
+},
+  {
+  code: 'hk01109',
+  name: '华润置地',
+  price: 35.28,
+  chg_pct: 1.09,
+  unit: '港元',
+  score: 0.9,
+  sector: '地产',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 34.9,
+  return_pct: 1.09,
+  high: 35.44,
+  low: 34.9
+},
+  {
+  code: '300059',
+  name: '东方财富',
+  price: 20.05,
+  chg_pct: 0.91,
+  unit: '元',
+  score: 11.1,
+  sector: '金融',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 19.76,
+  return_pct: 1.47,
+  high: 20.05,
+  low: 19.76
+},
+  {
+  code: 'hk00857',
+  name: '中国石油H',
+  price: 10.91,
+  chg_pct: 0.74,
+  unit: '港元',
+  score: 0.6,
+  sector: '能源',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 10.83,
+  return_pct: 0.74,
+  high: 10.91,
+  low: 10.83
+},
+  {
+  code: 'hk09922',
+  name: '九毛九',
+  price: 1.54,
+  chg_pct: 0.65,
+  unit: '港元',
+  score: 0.5,
+  sector: '餐饮',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 1.53,
+  return_pct: 0.65,
+  high: 1.54,
+  low: 1.53
+},
+  {
+  code: 'hk02015',
+  name: '理想汽车',
+  price: 62.15,
+  chg_pct: 0.57,
+  unit: '港元',
+  score: 0.5,
+  sector: '新能源汽车',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 61.8,
+  return_pct: 0.57,
+  high: 62.15,
+  low: 61.75
+},
+  {
+  code: 'hk09988',
+  name: '阿里巴巴',
+  price: 127.6,
+  chg_pct: 0.47,
+  unit: '港元',
+  score: 0.4,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 127.0,
+  return_pct: 0.47,
+  high: 128.4,
+  low: 127.0
+},
+  {
+  code: '002027',
+  name: '分众传媒',
+  price: 5.53,
+  chg_pct: 0.36,
+  unit: '元',
+  score: -9.7,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 5.51,
+  return_pct: 0.36,
+  high: 5.53,
+  low: 5.5
+},
+  {
+  code: '601398',
+  name: '工商银行',
+  price: 7.18,
+  chg_pct: 0.14,
+  unit: '元',
+  score: 10.1,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 7.17,
+  return_pct: 0.14,
+  high: 7.18,
+  low: 7.17
+},
+  {
+  code: 'hk02020',
+  name: '安踏体育',
+  price: 75.25,
+  chg_pct: 0.13,
+  unit: '港元',
+  score: -0.1,
+  sector: '体育',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 75.4,
+  return_pct: -0.2,
+  high: 75.4,
+  low: 75.25
+},
+  {
+  code: 'hk00941',
+  name: '中国移动',
+  price: 85.6,
+  chg_pct: 0.12,
+  unit: '港元',
+  score: 0.1,
+  sector: '通信',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 85.5,
+  return_pct: 0.12,
+  high: 85.65,
+  low: 85.5
+},
+  {
+  code: '600030',
+  name: '中信证券',
+  price: 26.21,
+  chg_pct: 0.08,
+  unit: '元',
+  score: 10.1,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 26.19,
+  return_pct: 0.08,
+  high: 26.21,
+  low: 26.03
+},
+  {
+  code: 'hk00066',
+  name: '港铁公司',
+  price: 33.06,
+  chg_pct: -0.12,
+  unit: '港元',
+  score: -0.1,
+  sector: '交通',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 33.12,
+  return_pct: -0.18,
+  high: 33.12,
+  low: 33.04
+},
+  {
+  code: 'hk09888',
+  name: '百度集团',
+  price: 128.0,
+  chg_pct: -0.16,
+  unit: '港元',
+  score: 0.2,
+  sector: 'AI',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 127.6,
+  return_pct: 0.31,
+  high: 128.0,
+  low: 127.3
+},
+  {
+  code: 'hk01928',
+  name: '金沙中国',
+  price: 15.1,
+  chg_pct: -0.26,
+  unit: '港元',
+  score: -0.2,
+  sector: '博彩',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 15.14,
+  return_pct: -0.26,
+  high: 15.14,
+  low: 15.09
+},
+  {
+  code: 'hk02318',
+  name: '中国平安H',
+  price: 60.65,
+  chg_pct: -0.33,
+  unit: '港元',
+  score: -0.3,
+  sector: '保险',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 60.85,
+  return_pct: -0.33,
+  high: 61.05,
+  low: 60.65
+},
+  {
+  code: 'hk00700',
+  name: '腾讯控股',
+  price: 439.0,
+  chg_pct: -0.54,
+  unit: '港元',
+  score: -0.4,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 441.4,
+  return_pct: -0.54,
+  high: 441.4,
+  low: 438.4
+},
+  {
+  code: 'hk03988',
+  name: '中国银行H',
+  price: 5.2,
+  chg_pct: -0.57,
+  unit: '港元',
+  score: -0.5,
+  sector: '银行',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 5.23,
+  return_pct: -0.57,
+  high: 5.27,
+  low: 5.2
+},
+  {
+  code: 'hk00027',
+  name: '银河娱乐',
+  price: 31.62,
+  chg_pct: -0.63,
+  unit: '港元',
+  score: -0.4,
+  sector: '博彩',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 31.76,
+  return_pct: -0.44,
+  high: 31.76,
+  low: 31.62
+},
+  {
+  code: 'hk01810',
+  name: '小米集团',
+  price: 29.76,
+  chg_pct: -0.8,
+  unit: '港元',
+  score: -0.6,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 30.0,
+  return_pct: -0.8,
+  high: 30.12,
+  low: 29.76
+},
+  {
+  code: 'hk09866',
+  name: '蔚来',
+  price: 42.36,
+  chg_pct: -0.98,
+  unit: '港元',
+  score: -0.8,
+  sector: '新能源汽车',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 42.78,
+  return_pct: -0.98,
+  high: 42.78,
+  low: 42.24
+},
+  {
+  code: 'hk00175',
+  name: '吉利汽车',
+  price: 19.26,
+  chg_pct: -0.98,
+  unit: '港元',
+  score: -0.8,
+  sector: '汽车',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 19.45,
+  return_pct: -0.98,
+  high: 19.45,
+  low: 19.14
+},
+  {
+  code: 'hk01398',
+  name: '工商银行H',
+  price: 6.78,
+  chg_pct: -1.02,
+  unit: '港元',
+  score: -0.8,
+  sector: '银行',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 6.85,
+  return_pct: -1.02,
+  high: 6.85,
+  low: 6.78
+},
+  {
+  code: 'hk00728',
+  name: '中国电信',
+  price: 5.33,
+  chg_pct: -1.11,
+  unit: '港元',
+  score: -0.9,
+  sector: '通信',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 5.39,
+  return_pct: -1.11,
+  high: 5.39,
+  low: 5.32
+},
+  {
+  code: 'hk02331',
+  name: '李宁',
+  price: 18.09,
+  chg_pct: -1.15,
+  unit: '港元',
+  score: -0.9,
+  sector: '体育',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 18.3,
+  return_pct: -1.15,
+  high: 18.3,
+  low: 18.08
+},
+  {
+  code: 'hk00006',
+  name: '电能实业',
+  price: 61.6,
+  chg_pct: -1.46,
+  unit: '港元',
+  score: -0.2,
+  sector: '电力',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 61.55,
+  return_pct: 0.08,
+  high: 61.6,
+  low: 61.55
+},
+  {
+  code: 'hk00003',
+  name: '香港中华煤气',
+  price: 7.19,
+  chg_pct: -1.51,
+  unit: '港元',
+  score: -1.2,
+  sector: '燃气',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 7.3,
+  return_pct: -1.51,
+  high: 7.3,
+  low: 7.19
+},
+  {
+  code: 'hk00883',
+  name: '中国海洋石油',
+  price: 26.92,
+  chg_pct: -1.9,
+  unit: '港元',
+  score: -1.5,
+  sector: '能源',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 27.44,
+  return_pct: -1.9,
+  high: 27.44,
+  low: 26.9
+},
+  {
+  code: 'hk01299',
+  name: '友邦保险',
+  price: 84.3,
+  chg_pct: -2.03,
+  unit: '港元',
+  score: -1.6,
+  sector: '保险',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 86.05,
+  return_pct: -2.03,
+  high: 86.05,
+  low: 84.3
+},
+  {
+  code: 'hk06862',
+  name: '海底捞',
+  price: 12.65,
+  chg_pct: -2.09,
+  unit: '港元',
+  score: -1.7,
+  sector: '餐饮',
+  reason: "2026-05-25推荐",
+  added_date: '2026-05-25',
+  added_price: 12.92,
+  return_pct: -2.09,
+  high: 12.92,
+  low: 12.61
+},
+  {
+  code: 'hk06098',
+  name: '碧桂园服务',
+  price: 5.92,
+  chg_pct: -2.31,
+  unit: '港元',
+  score: -0.8,
+  sector: '物业',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 5.95,
+  return_pct: -0.5,
+  high: 5.96,
+  low: 5.92
+},
+  {
+  code: 'hk06618',
+  name: '京东健康',
+  price: 39.62,
+  chg_pct: -2.37,
+  unit: '港元',
+  score: -0.4,
+  sector: '互联网医疗',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 39.6,
+  return_pct: 0.05,
+  high: 39.64,
+  low: 39.6
+},
+  {
+  code: 'hk09618',
+  name: '京东集团',
+  price: 118.6,
+  chg_pct: -2.55,
+  unit: '港元',
+  score: -0.4,
+  sector: '互联网',
+  reason: "2026-05-26推荐",
+  added_date: '2026-05-26',
+  added_price: 118.3,
+  return_pct: 0.25,
+  high: 118.6,
+  low: 118.3
+},
+  {
+  code: 'hk03690',
+  name: '美团',
+  price: 78.8,
+  chg_pct: -3.13,
+  unit: '港元',
+  score: -2.5,
+  sector: '',
+  reason: "2026-05-25 Monday首次推荐",
+  added_date: '2026-05-25',
+  added_price: 81.35,
+  return_pct: -3.13,
+  high: 81.35,
+  low: 78.8
+}
+};
+
+function getStock(code) {
+  for (var i = 0; i < stockData.length; i++) {
+    if (stockData[i].code === code) return stockData[i];
+  }
+  return null;
+}
+
+function showStock(code) {
+  var s = getStock(code);
+  if (!s) return;
+
+  var chgCls = s.chg_pct >= 0 ? 'up' : 'down';
+  var arrow = s.chg_pct >= 0 ? '▲' : '▼';
+
+  var scoreCls = 'none';
+  if (s.score >= 30) scoreCls = 'high';
+  else if (s.score >= 20) scoreCls = 'mid';
+  else if (s.score >= 10) scoreCls = 'low';
+
+  var returnCls = s.return_pct >= 0 ? 'up' : 'down';
+  var returnArrow = s.return_pct >= 0 ? '▲' : '▼';
+
+  var addedPriceStr = s.added_price ? s.added_price.toFixed(2) : '-';
+  var highStr = s.high ? s.high.toFixed(2) : '-';
+  var lowStr = s.low ? s.low.toFixed(2) : '-';
+  var sectorStr = s.sector || '未分类';
+
+  var reasonHtml = s.reason ? '<div class="modal-reason"><strong>📌 推荐理由</strong><br>' + s.reason + '</div>' : '';
+
+  document.getElementById('modalBox').innerHTML =
+    '<div class="modal-handle"></div>' +
+    '<div class="modal-title">' + s.name + '</div>' +
+    '<div class="modal-code">' + s.code + ' · ' + sectorStr + '</div>' +
+    '<div class="modal-price-row">' +
+      '<span class="modal-price">' + s.price.toFixed(2) + '</span>' +
+      '<span class="modal-chg ' + chgCls + '">' + arrow + ' ' + s.chg_pct.toFixed(2) + '%</span>' +
+      '<span class="modal-score ' + scoreCls + '">评分 ' + s.score.toFixed(1) + '</span>' +
+    '</div>' +
+    '<div class="modal-grid">' +
+      '<div class="modal-stat"><div class="val ' + returnCls + '">' + returnArrow + ' ' + s.return_pct.toFixed(2) + '%</div><div class="lbl">累计收益</div></div>' +
+      '<div class="modal-stat"><div class="val">' + addedPriceStr + '</div><div class="lbl">买入价</div></div>' +
+      '<div class="modal-stat"><div class="val">' + (s.added_date || '-') + '</div><div class="lbl">加入日期</div></div>' +
+    '</div>' +
+    '<div class="modal-grid">' +
+      '<div class="modal-stat"><div class="val">' + highStr + '</div><div class="lbl">最高（自加入）</div></div>' +
+      '<div class="modal-stat"><div class="val">' + lowStr + '</div><div class="lbl">最低（自加入）</div></div>' +
+      '<div class="modal-stat"><div class="val">' + s.unit + '</div><div class="lbl">货币</div></div>' +
+    '</div>' +
+    reasonHtml +
+    '<button class="modal-close" onclick="closeModal()">关闭</button>';
+
+  document.getElementById('modalOverlay').classList.add('active');
+  document.getElementById('modalBox').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.getElementById('modalBox').style.display = 'none';
+}
+
 function expandMore() {
   var btn = document.getElementById('expandBtn');
+  if (!btn) return;
   var shown = parseInt(btn.getAttribute('data-shown'));
   var batch = parseInt(btn.getAttribute('data-batch'));
   var total = parseInt(btn.getAttribute('data-total'));
