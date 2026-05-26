@@ -48,6 +48,14 @@
   .stats-box { flex: 1; background: #fff; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
   .stats-box .num { font-size: 22px; font-weight: 700; }
   .stats-box .label { font-size: 11px; color: #888; margin-top: 2px; }
+  .expand-wrap { text-align: center; margin: 12px 0; }
+  .expand-btn {
+    background: #0f3460; color: #fff; border: none; border-radius: 8px;
+    padding: 10px 28px; font-size: 14px; cursor: pointer; width: 100%;
+    transition: background 0.2s;
+  }
+  .expand-btn:hover { background: #1a5276; }
+  .expand-btn:active { background: #0c2748; }
   .footer { text-align: center; font-size: 11px; color: #aaa; margin-top: 24px; padding: 16px; border-top: 1px solid #eee; }
 </style>
 </head>
@@ -136,136 +144,202 @@
 </div>
 
 <div class="section">
-  <div class="section-title">📋 全部自选股 (40只)</div>
-  <ul class="stock-list">
-    <li class="stock-item">
+  <div class="section-title">📋 全部自选股 (40只 · 评分排序)</div>
+  <ul class="stock-list" id="fullList">
+    <li class="stock-item" data-index="0">
       <div class="info"><div class="name">京东方A <span class="code">000725</span></div><div class="price">5.77 元</div></div>
       <div class="change up">+9.49%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">紫金矿业 <span class="code">601899</span></div><div class="price">32.90 元</div></div>
-      <div class="change up">+4.94%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="1">
       <div class="info"><div class="name">TCL科技 <span class="code">000100</span></div><div class="price">4.65 元</div></div>
       <div class="change up">+4.73%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">网易 <span class="code">hk09999</span></div><div class="price">189.30 港元</div></div>
-      <div class="change up">+4.30%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">比亚迪股份 <span class="code">hk01211</span></div><div class="price">93.65 港元</div></div>
-      <div class="change up">+2.24%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国人寿H <span class="code">hk02628</span></div><div class="price">29.42 港元</div></div>
-      <div class="change up">+1.73%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">汇丰控股 <span class="code">hk00005</span></div><div class="price">145.50 港元</div></div>
-      <div class="change up">+1.11%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">华润置地 <span class="code">hk01109</span></div><div class="price">35.28 港元</div></div>
-      <div class="change up">+1.09%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="2">
+      <div class="info"><div class="name">紫金矿业 <span class="code">601899</span></div><div class="price">32.90 元</div></div>
+      <div class="change up">+4.94%</div>
+    </li>
+    <li class="stock-item" data-index="3">
       <div class="info"><div class="name">东方财富 <span class="code">300059</span></div><div class="price">20.05 元</div></div>
       <div class="change up">+0.91%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国石油H <span class="code">hk00857</span></div><div class="price">10.91 港元</div></div>
-      <div class="change up">+0.74%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">九毛九 <span class="code">hk09922</span></div><div class="price">1.54 港元</div></div>
-      <div class="change up">+0.65%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">理想汽车 <span class="code">hk02015</span></div><div class="price">62.15 港元</div></div>
-      <div class="change up">+0.57%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">阿里巴巴 <span class="code">hk09988</span></div><div class="price">127.60 港元</div></div>
-      <div class="change up">+0.47%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">分众传媒 <span class="code">002027</span></div><div class="price">5.53 元</div></div>
-      <div class="change up">+0.36%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="4">
       <div class="info"><div class="name">工商银行 <span class="code">601398</span></div><div class="price">7.18 元</div></div>
       <div class="change up">+0.14%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">安踏体育 <span class="code">hk02020</span></div><div class="price">75.25 港元</div></div>
-      <div class="change up">+0.13%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国移动 <span class="code">hk00941</span></div><div class="price">85.60 港元</div></div>
-      <div class="change up">+0.12%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="5">
       <div class="info"><div class="name">中信证券 <span class="code">600030</span></div><div class="price">26.21 元</div></div>
       <div class="change up">+0.08%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">港铁公司 <span class="code">hk00066</span></div><div class="price">33.06 港元</div></div>
-      <div class="change down">-0.12%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="6">
+      <div class="info"><div class="name">网易 <span class="code">hk09999</span></div><div class="price">189.30 港元</div></div>
+      <div class="change up">+4.30%</div>
+    </li>
+    <li class="stock-item" data-index="7">
+      <div class="info"><div class="name">比亚迪股份 <span class="code">hk01211</span></div><div class="price">93.65 港元</div></div>
+      <div class="change up">+2.24%</div>
+    </li>
+    <li class="stock-item" data-index="8">
+      <div class="info"><div class="name">中国人寿H <span class="code">hk02628</span></div><div class="price">29.42 港元</div></div>
+      <div class="change up">+1.73%</div>
+    </li>
+    <li class="stock-item" data-index="9">
+      <div class="info"><div class="name">汇丰控股 <span class="code">hk00005</span></div><div class="price">145.50 港元</div></div>
+      <div class="change up">+1.11%</div>
+    </li>
+    <li class="stock-item" data-index="10">
+      <div class="info"><div class="name">华润置地 <span class="code">hk01109</span></div><div class="price">35.28 港元</div></div>
+      <div class="change up">+1.09%</div>
+    </li>
+    <li class="stock-item" data-index="11">
+      <div class="info"><div class="name">中国石油H <span class="code">hk00857</span></div><div class="price">10.91 港元</div></div>
+      <div class="change up">+0.74%</div>
+    </li>
+    <li class="stock-item" data-index="12">
+      <div class="info"><div class="name">九毛九 <span class="code">hk09922</span></div><div class="price">1.54 港元</div></div>
+      <div class="change up">+0.65%</div>
+    </li>
+    <li class="stock-item" data-index="13">
+      <div class="info"><div class="name">理想汽车 <span class="code">hk02015</span></div><div class="price">62.15 港元</div></div>
+      <div class="change up">+0.57%</div>
+    </li>
+    <li class="stock-item" data-index="14">
+      <div class="info"><div class="name">阿里巴巴 <span class="code">hk09988</span></div><div class="price">127.60 港元</div></div>
+      <div class="change up">+0.47%</div>
+    </li>
+    <li class="stock-item" data-index="15">
       <div class="info"><div class="name">百度集团 <span class="code">hk09888</span></div><div class="price">128.00 港元</div></div>
       <div class="change down">-0.16%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" data-index="16">
+      <div class="info"><div class="name">中国移动 <span class="code">hk00941</span></div><div class="price">85.60 港元</div></div>
+      <div class="change up">+0.12%</div>
+    </li>
+    <li class="stock-item" data-index="17">
+      <div class="info"><div class="name">安踏体育 <span class="code">hk02020</span></div><div class="price">75.25 港元</div></div>
+      <div class="change up">+0.13%</div>
+    </li>
+    <li class="stock-item" data-index="18">
+      <div class="info"><div class="name">港铁公司 <span class="code">hk00066</span></div><div class="price">33.06 港元</div></div>
+      <div class="change down">-0.12%</div>
+    </li>
+    <li class="stock-item" data-index="19">
       <div class="info"><div class="name">金沙中国 <span class="code">hk01928</span></div><div class="price">15.10 港元</div></div>
       <div class="change down">-0.26%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国平安H <span class="code">hk02318</span></div><div class="price">60.65 港元</div></div>
-      <div class="change down">-0.33%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">腾讯控股 <span class="code">hk00700</span></div><div class="price">439.00 港元</div></div>
-      <div class="change down">-0.54%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国银行H <span class="code">hk03988</span></div><div class="price">5.20 港元</div></div>
-      <div class="change down">-0.57%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">银河娱乐 <span class="code">hk00027</span></div><div class="price">31.62 港元</div></div>
-      <div class="change down">-0.63%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">小米集团 <span class="code">hk01810</span></div><div class="price">29.76 港元</div></div>
-      <div class="change down">-0.80%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">蔚来 <span class="code">hk09866</span></div><div class="price">42.36 港元</div></div>
-      <div class="change down">-0.98%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">吉利汽车 <span class="code">hk00175</span></div><div class="price">19.26 港元</div></div>
-      <div class="change down">-0.98%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">工商银行H <span class="code">hk01398</span></div><div class="price">6.78 港元</div></div>
-      <div class="change down">-1.02%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国电信 <span class="code">hk00728</span></div><div class="price">5.33 港元</div></div>
-      <div class="change down">-1.11%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">李宁 <span class="code">hk02331</span></div><div class="price">18.09 港元</div></div>
-      <div class="change down">-1.15%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" style="display:none" data-index="20">
       <div class="info"><div class="name">电能实业 <span class="code">hk00006</span></div><div class="price">61.60 港元</div></div>
       <div class="change down">-1.46%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">香港中华煤气 <span class="code">hk00003</span></div><div class="price">7.19 港元</div></div>
-      <div class="change down">-1.51%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">中国海洋石油 <span class="code">hk00883</span></div><div class="price">26.92 港元</div></div>
-      <div class="change down">-1.90%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">友邦保险 <span class="code">hk01299</span></div><div class="price">84.30 港元</div></div>
-      <div class="change down">-2.03%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">海底捞 <span class="code">hk06862</span></div><div class="price">12.65 港元</div></div>
-      <div class="change down">-2.09%</div>
-    </li>    <li class="stock-item">
-      <div class="info"><div class="name">碧桂园服务 <span class="code">hk06098</span></div><div class="price">5.92 港元</div></div>
-      <div class="change down">-2.31%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" style="display:none" data-index="21">
+      <div class="info"><div class="name">中国平安H <span class="code">hk02318</span></div><div class="price">60.65 港元</div></div>
+      <div class="change down">-0.33%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="22">
+      <div class="info"><div class="name">腾讯控股 <span class="code">hk00700</span></div><div class="price">439.00 港元</div></div>
+      <div class="change down">-0.54%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="23">
+      <div class="info"><div class="name">银河娱乐 <span class="code">hk00027</span></div><div class="price">31.62 港元</div></div>
+      <div class="change down">-0.63%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="24">
       <div class="info"><div class="name">京东健康 <span class="code">hk06618</span></div><div class="price">39.62 港元</div></div>
       <div class="change down">-2.37%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" style="display:none" data-index="25">
       <div class="info"><div class="name">京东集团 <span class="code">hk09618</span></div><div class="price">118.60 港元</div></div>
       <div class="change down">-2.55%</div>
-    </li>    <li class="stock-item">
+    </li>
+    <li class="stock-item" style="display:none" data-index="26">
+      <div class="info"><div class="name">中国银行H <span class="code">hk03988</span></div><div class="price">5.20 港元</div></div>
+      <div class="change down">-0.57%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="27">
+      <div class="info"><div class="name">小米集团 <span class="code">hk01810</span></div><div class="price">29.76 港元</div></div>
+      <div class="change down">-0.80%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="28">
+      <div class="info"><div class="name">蔚来 <span class="code">hk09866</span></div><div class="price">42.36 港元</div></div>
+      <div class="change down">-0.98%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="29">
+      <div class="info"><div class="name">吉利汽车 <span class="code">hk00175</span></div><div class="price">19.26 港元</div></div>
+      <div class="change down">-0.98%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="30">
+      <div class="info"><div class="name">工商银行H <span class="code">hk01398</span></div><div class="price">6.78 港元</div></div>
+      <div class="change down">-1.02%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="31">
+      <div class="info"><div class="name">碧桂园服务 <span class="code">hk06098</span></div><div class="price">5.92 港元</div></div>
+      <div class="change down">-2.31%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="32">
+      <div class="info"><div class="name">中国电信 <span class="code">hk00728</span></div><div class="price">5.33 港元</div></div>
+      <div class="change down">-1.11%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="33">
+      <div class="info"><div class="name">李宁 <span class="code">hk02331</span></div><div class="price">18.09 港元</div></div>
+      <div class="change down">-1.15%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="34">
+      <div class="info"><div class="name">香港中华煤气 <span class="code">hk00003</span></div><div class="price">7.19 港元</div></div>
+      <div class="change down">-1.51%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="35">
+      <div class="info"><div class="name">中国海洋石油 <span class="code">hk00883</span></div><div class="price">26.92 港元</div></div>
+      <div class="change down">-1.90%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="36">
+      <div class="info"><div class="name">友邦保险 <span class="code">hk01299</span></div><div class="price">84.30 港元</div></div>
+      <div class="change down">-2.03%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="37">
+      <div class="info"><div class="name">海底捞 <span class="code">hk06862</span></div><div class="price">12.65 港元</div></div>
+      <div class="change down">-2.09%</div>
+    </li>
+    <li class="stock-item" style="display:none" data-index="38">
       <div class="info"><div class="name">美团 <span class="code">hk03690</span></div><div class="price">78.80 港元</div></div>
       <div class="change down">-3.13%</div>
     </li>
+    <li class="stock-item" style="display:none" data-index="39">
+      <div class="info"><div class="name">分众传媒 <span class="code">002027</span></div><div class="price">5.53 元</div></div>
+      <div class="change up">+0.36%</div>
+    </li>
   </ul>
+  <div class="expand-wrap">
+    <button id="expandBtn" class="expand-btn" onclick="expandMore()" data-batch="50" data-shown="20" data-total="40">
+      展开更多 (20/20)
+    </button>
+  </div>
 </div>
 
 <div class="footer">
   数据来源：腾讯财经 · 不构成投资建议 仅供参考<br>
   <a href="https://github.com/tianhao0079/daily-briefing">📊 Hermes 智能投研</a>
 </div>
+
+<script>
+function expandMore() {
+  var btn = document.getElementById('expandBtn');
+  var shown = parseInt(btn.getAttribute('data-shown'));
+  var batch = parseInt(btn.getAttribute('data-batch'));
+  var total = parseInt(btn.getAttribute('data-total'));
+  var next = Math.min(shown + batch, total);
+  var items = document.querySelectorAll('#fullList .stock-item');
+  for (var i = shown; i < next; i++) {
+    if (items[i]) items[i].style.display = 'flex';
+  }
+  var remaining = total - next;
+  if (remaining > 0) {
+    var showBatch = Math.min(batch, remaining);
+    btn.textContent = '展开更多 (' + showBatch + '/' + remaining + ')';
+    btn.setAttribute('data-shown', next);
+  } else {
+    btn.style.display = 'none';
+  }
+}
+</script>
 
 </body>
 </html>
