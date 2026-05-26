@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>每日收评 2026-05-26</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: #f5f7fa;
+    color: #1a1a2e;
+    font-size: 15px;
+    line-height: 1.6;
+    padding-bottom: 40px;
+  }
+  .container { max-width: 480px; margin: 0 auto; padding: 0 16px; }
+  
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 28px 16px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header h1 { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+  .header .date { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  .header .subtitle { font-size: 12px; opacity: 0.5; margin-top: 2px; }
+
+  /* Index Cards */
+  .index-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: -18px 16px 16px;
+  }
+  .index-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .index-card .name { font-size: 12px; color: #888; }
+  .index-card .price { font-size: 20px; font-weight: 700; margin: 2px 0; }
+  .index-card .change { font-size: 13px; font-weight: 600; }
+  .index-card .change.up { color: #e74c3c; }
+  .index-card .change.down { color: #27ae60; }
+
+  /* Section */
+  .section { margin: 16px; }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #0f3460;
+  }
+
+  /* Stock List */
+  .stock-list { list-style: none; }
+  .stock-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .stock-item .info { flex: 1; }
+  .stock-item .name { font-weight: 600; font-size: 14px; }
+  .stock-item .price { font-size: 12px; color: #888; }
+  .stock-item .change {
+    font-weight: 700;
+    font-size: 15px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .stock-item .change.up { color: #e74c3c; }
+  .stock-item .change.down { color: #27ae60; }
+
+  /* Summary Box */
+  .summary-box {
+    background: linear-gradient(135deg, #fff9f0, #fff);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 0 16px 16px;
+    border: 1px solid #f0e6d6;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #444;
+  }
+  .summary-box strong { color: #1a1a2e; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .tag.up { background: #fde8e8; color: #e74c3c; }
+  .tag.down { background: #e8f5e9; color: #27ae60; }
+  .tag.flat { background: #f0f0f0; color: #888; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 24px;
+    padding: 16px;
+    border-top: 1px solid #eee;
+  }
+  .footer a { color: #0f3460; text-decoration: none; }
+
+  /* Extra stats */
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    margin: 0 16px 16px;
+  }
+  .stats-box {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .stats-box .num { font-size: 22px; font-weight: 700; }
+  .stats-box .label { font-size: 11px; color: #888; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📈 每日收评</h1>
+  <div class="date">2026年5月26日 周二</div>
+  <div class="subtitle">Hermes 智能投研 · 数据仅供参考</div>
+</div>
+
+<div class="index-grid">
+  <div class="index-card">
+    <div class="name">上证指数</div>
+    <div class="price">4,145.37</div>
+    <div class="change down">▼ 0.17%</div>
+  </div>
+  <div class="index-card">
+    <div class="name">深证成指</div>
+    <div class="price">15,876.16</div>
+    <div class="change up">▲ 0.12%</div>
+  </div>
+  <div class="index-card">
+    <div class="name">创业板指</div>
+    <div class="price">4,043.07</div>
+    <div class="change up">▲ 0.54%</div>
+  </div>
+  <div class="index-card">
+    <div class="name">恒生指数</div>
+    <div class="price">—</div>
+    <div class="change flat">— 已收盘</div>
+  </div>
+</div>
+
+<div class="summary-box">
+  <strong>📋 盘面概况</strong><br>
+  三大指数涨跌互现，沪指微跌 0.17% 报 4145 点，深成指微涨 0.12%，创业板涨 0.54%。<br>
+  个股方面：<strong>京东方A</strong> 大涨逾 10% 领跑，<strong>紫金矿业</strong> 涨近 6% 跟随，<strong>长江电力</strong>、<strong>东方财富</strong> 涨约 1.8-2%。<br>
+  下跌方面：<strong>美团</strong> 跌 1.6%，<strong>隆基绿能</strong> 跌 1.1%，<strong>贵州茅台</strong> 小幅回落 0.9%。
+</div>
+
+<div class="section">
+  <div class="section-title">🏆 强势股</div>
+  <ul class="stock-list">
+    <li class="stock-item">
+      <div class="info"><div class="name">京东方A</div><div class="price">5.77 元</div></div>
+      <div class="change up">+10.54% ▲</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">紫金矿业</div><div class="price">32.90 元</div></div>
+      <div class="change up">+5.58% ▲</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">东方财富</div><div class="price">20.05 元</div></div>
+      <div class="change up">+1.88% ▲</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">长江电力</div><div class="price">27.14 元</div></div>
+      <div class="change up">+1.80% ▲</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">伊利股份</div><div class="price">26.58 元</div></div>
+      <div class="change up">+1.06% ▲</div>
+    </li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">📉 弱势股</div>
+  <ul class="stock-list">
+    <li class="stock-item">
+      <div class="info"><div class="name">美团-W</div><div class="price">78.65 港元</div></div>
+      <div class="change down">-1.63% ▼</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">隆基绿能</div><div class="price">14.61 元</div></div>
+      <div class="change down">-1.08% ▼</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">贵州茅台</div><div class="price">1,273.38 元</div></div>
+      <div class="change down">-0.93% ▼</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">小米集团-W</div><div class="price">29.76 港元</div></div>
+      <div class="change down">-0.80% ▼</div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">美的集团</div><div class="price">79.56 元</div></div>
+      <div class="change down">-0.30% ▼</div>
+    </li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="section-title">📌 自选股全景</div>
+  <ul class="stock-list">
+    <li class="stock-item">
+      <div class="info"><div class="name">腾讯控股</div><div class="price">441.00 港元</div></div>
+      <div class="change up">+0.68% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">阿里巴巴-W</div><div class="price">128.00 港元</div></div>
+      <div class="change up">+0.63% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">比亚迪</div><div class="price">96.56 元</div></div>
+      <div class="change up">+0.79% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">工商银行</div><div class="price">7.18 元</div></div>
+      <div class="change up">+0.14% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">分众传媒</div><div class="price">5.53 元</div></div>
+      <div class="change up">+0.91% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">招商银行</div><div class="price">37.01 元</div></div>
+      <div class="change up">+0.19% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">中信证券</div><div class="price">26.22 元</div></div>
+      <div class="change up">+0.15% <span class="tag up">涨</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">小米集团-W</div><div class="price">29.76 港元</div></div>
+      <div class="change down">-0.80% <span class="tag down">跌</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">贵州茅台</div><div class="price">1,273.38 元</div></div>
+      <div class="change down">-0.93% <span class="tag down">跌</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">隆基绿能</div><div class="price">14.61 元</div></div>
+      <div class="change down">-1.08% <span class="tag down">跌</span></div>
+    </li>
+    <li class="stock-item">
+      <div class="info"><div class="name">美团-W</div><div class="price">78.65 港元</div></div>
+      <div class="change down">-1.63% <span class="tag down">跌</span></div>
+    </li>
+  </ul>
+</div>
+
+<div class="stats-row">
+  <div class="stats-box">
+    <div class="num" style="color:#e74c3c;">7</div>
+    <div class="label">上涨</div>
+  </div>
+  <div class="stats-box">
+    <div class="num" style="color:#27ae60;">4</div>
+    <div class="label">下跌</div>
+  </div>
+  <div class="stats-box">
+    <div class="num">11</div>
+    <div class="label">监控中</div>
+  </div>
+</div>
+
+<div class="footer">
+  数据来源：新浪财经 · 截至 15:00<br>
+  不构成投资建议 仅供参考<br>
+  <a href="#">📊 Hermes 智能投研</a>
+</div>
+
+</body>
+</html>
