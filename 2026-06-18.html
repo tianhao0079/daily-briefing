@@ -132,11 +132,6 @@
     <div class="price">4,252.39</div>
     <div class="change up">▲ +2.05%</div>
   </div>
-  <div class="index-card">
-    <div class="name">恒生指数</div>
-    <div class="price">23,924.81</div>
-    <div class="change down">▼ -1.59%</div>
-  </div>
 </div>
 
 <div class="section">
@@ -188,38 +183,6 @@
 <div class="section">
   <div class="section-title">📉 跌幅前5</div>
   <ul class="stock-list">
-    <li class="stock-item" onclick="showStock('hk01109')">
-      <div class="info"><div class="name">华润置地</div><div class="price">32.08 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-7.34% ▼<span class="tag down">↓</span></div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">31.5</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk02628')">
-      <div class="info"><div class="name">中国人寿H</div><div class="price">28.02 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-6.60% ▼<span class="tag down">↓</span></div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">32.7</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('601688')">
-      <div class="info"><div class="name">华泰证券</div><div class="price">19.55 元</div></div>
-      <div class="right-col">
-        <div class="change down">-4.17% ▼<span class="tag down">↓</span></div>
-        <div class="ret down">累+8.37%</div>
-        <div class="score-none">4.2</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk02318')">
-      <div class="info"><div class="name">中国平安H</div><div class="price">53.85 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-4.01% ▼<span class="tag down">↓</span></div>
-        <div class="ret down">累-7.16%</div>
-        <div class="score-none">-5.1</div>
-      </div>
-    </li>
     <li class="stock-item" onclick="showStock('000776')">
       <div class="info"><div class="name">广发证券</div><div class="price">20.64 元</div></div>
       <div class="right-col">
@@ -228,58 +191,50 @@
         <div class="score-none">4.8</div>
       </div>
     </li>
+    <li class="stock-item" onclick="showStock('601186')">
+      <div class="info"><div class="name">中国铁建</div><div class="price">6.30 元</div></div>
+      <div class="right-col">
+        <div class="change down">-2.78% ▼<span class="tag down">↓</span></div>
+        <div class="ret down">累-1.56%</div>
+        <div class="score-none">-3.5</div>
+      </div>
+    </li>
+    <li class="stock-item" onclick="showStock('601211')">
+      <div class="info"><div class="name">国泰君安</div><div class="price">17.28 元</div></div>
+      <div class="right-col">
+        <div class="change down">-2.76% ▼<span class="tag down">↓</span></div>
+        <div class="ret down">累+15.35%</div>
+        <div class="score-none">8.7</div>
+      </div>
+    </li>
+    <li class="stock-item" onclick="showStock('002460')">
+      <div class="info"><div class="name">赣锋锂业</div><div class="price">69.36 元</div></div>
+      <div class="right-col">
+        <div class="change down">-2.75% ▼<span class="tag down">↓</span></div>
+        <div class="ret down">累+0.55%</div>
+        <div class="score-none">-2.2</div>
+      </div>
+    </li>
+    <li class="stock-item" onclick="showStock('601398')">
+      <div class="info"><div class="name">工商银行</div><div class="price">7.16 元</div></div>
+      <div class="right-col">
+        <div class="change down">-2.72% ▼<span class="tag down">↓</span></div>
+        <div class="ret down">累-0.14%</div>
+        <div class="score-none">-2.6</div>
+      </div>
+    </li>
   </ul>
 </div>
 
 <div class="stats-row">
   <div class="stats-box"><div class="num" style="color:#e74c3c;">5</div><div class="label">上涨</div></div>
-  <div class="stats-box"><div class="num" style="color:#27ae60;">29</div><div class="label">下跌</div></div>
-  <div class="stats-box"><div class="num">35</div><div class="label">监控中</div></div>
+  <div class="stats-box"><div class="num" style="color:#27ae60;">13</div><div class="label">下跌</div></div>
+  <div class="stats-box"><div class="num">18</div><div class="label">监控中</div></div>
 </div>
 
 <div class="section">
-  <div class="section-title">📋 全部自选股 (35只 · 评分排序)</div>
+  <div class="section-title">📋 全部自选股 (18只 · 评分排序)</div>
   <ul class="stock-list" id="fullList">
-    <li class="stock-item" onclick="showStock('hk03988')">
-      <div class="info"><div class="name">中国银行H <span class="code">hk03988</span></div><div class="price">5.27 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-0.94%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">35.0</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk01398')">
-      <div class="info"><div class="name">工商银行H <span class="code">hk01398</span></div><div class="price">6.85 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-2.70%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">33.8</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk02628')">
-      <div class="info"><div class="name">中国人寿H <span class="code">hk02628</span></div><div class="price">28.02 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-6.60%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">32.7</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk01109')">
-      <div class="info"><div class="name">华润置地 <span class="code">hk01109</span></div><div class="price">32.08 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-7.34%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">31.5</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk03690')">
-      <div class="info"><div class="name">美团 <span class="code">hk03690</span></div><div class="price">71.80 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-3.49%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-high">30.3</div>
-      </div>
-    </li>
     <li class="stock-item" onclick="showStock('603986')">
       <div class="info"><div class="name">兆易创新 <span class="code">603986</span></div><div class="price">629.00 元</div></div>
       <div class="right-col">
@@ -336,28 +291,12 @@
         <div class="score-none">4.8</div>
       </div>
     </li>
-    <li class="stock-item" onclick="showStock('601688')">
-      <div class="info"><div class="name">华泰证券 <span class="code">601688</span></div><div class="price">19.55 元</div></div>
-      <div class="right-col">
-        <div class="change down">-4.17%</div>
-        <div class="ret down">累+8.37%</div>
-        <div class="score-none">4.2</div>
-      </div>
-    </li>
     <li class="stock-item" onclick="showStock('300782')">
       <div class="info"><div class="name">卓胜微 <span class="code">300782</span></div><div class="price">106.10 元</div></div>
       <div class="right-col">
         <div class="change up">+6.31%</div>
         <div class="ret up">累+0.76%</div>
         <div class="score-none">3.7</div>
-      </div>
-    </li>
-    <li class="stock-item" onclick="showStock('hk09999')">
-      <div class="info"><div class="name">网易 <span class="code">hk09999</span></div><div class="price">190.50 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-2.56%</div>
-        <div class="ret down">累+4.96%</div>
-        <div class="score-none">2.5</div>
       </div>
     </li>
     <li class="stock-item" onclick="showStock('601985')">
@@ -376,14 +315,6 @@
         <div class="score-none">0.2</div>
       </div>
     </li>
-    <li class="stock-item" onclick="showStock('hk00011')">
-      <div class="info"><div class="name">恒生银行 <span class="code">hk00011</span></div><div class="price">152.40 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-0.13%</div>
-        <div class="ret down">累+0.00%</div>
-        <div class="score-none">0.0</div>
-      </div>
-    </li>
     <li class="stock-item" onclick="showStock('000963')">
       <div class="info"><div class="name">华东医药 <span class="code">000963</span></div><div class="price">28.34 元</div></div>
       <div class="right-col">
@@ -392,15 +323,7 @@
         <div class="score-none">-0.5</div>
       </div>
     </li>
-    <li class="stock-item" onclick="showStock('300495')">
-      <div class="info"><div class="name">美尚生态 <span class="code">300495</span></div><div class="price">0.13 元</div></div>
-      <div class="right-col">
-        <div class="change up">+0.00%</div>
-        <div class="ret up">累+0.00%</div>
-        <div class="score-none">-2.0</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('600196')">
+    <li class="stock-item" onclick="showStock('600196')">
       <div class="info"><div class="name">复星医药 <span class="code">600196</span></div><div class="price">21.79 元</div></div>
       <div class="right-col">
         <div class="change up">+0.97%</div>
@@ -408,7 +331,7 @@
         <div class="score-none">-2.2</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('002460')">
+    <li class="stock-item" onclick="showStock('002460')">
       <div class="info"><div class="name">赣锋锂业 <span class="code">002460</span></div><div class="price">69.36 元</div></div>
       <div class="right-col">
         <div class="change down">-2.75%</div>
@@ -416,7 +339,7 @@
         <div class="score-none">-2.2</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('600036')">
+    <li class="stock-item" onclick="showStock('600036')">
       <div class="info"><div class="name">招商银行 <span class="code">600036</span></div><div class="price">37.26 元</div></div>
       <div class="right-col">
         <div class="change down">-2.54%</div>
@@ -424,23 +347,7 @@
         <div class="score-none">-2.3</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk01299')">
-      <div class="info"><div class="name">友邦保险 <span class="code">hk01299</span></div><div class="price">73.70 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-1.80%</div>
-        <div class="ret down">累-3.41%</div>
-        <div class="score-none">-2.4</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk09988')">
-      <div class="info"><div class="name">阿里巴巴 <span class="code">hk09988</span></div><div class="price">104.90 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-1.87%</div>
-        <div class="ret down">累-3.67%</div>
-        <div class="score-none">-2.6</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('600016')">
+    <li class="stock-item" onclick="showStock('600016')">
       <div class="info"><div class="name">民生银行 <span class="code">600016</span></div><div class="price">3.48 元</div></div>
       <div class="right-col">
         <div class="change down">-2.25%</div>
@@ -448,7 +355,7 @@
         <div class="score-none">-2.6</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('601398')">
+    <li class="stock-item" onclick="showStock('601398')">
       <div class="info"><div class="name">工商银行 <span class="code">601398</span></div><div class="price">7.16 元</div></div>
       <div class="right-col">
         <div class="change down">-2.72%</div>
@@ -456,7 +363,7 @@
         <div class="score-none">-2.6</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('000538')">
+    <li class="stock-item" onclick="showStock('000538')">
       <div class="info"><div class="name">云南白药 <span class="code">000538</span></div><div class="price">48.43 元</div></div>
       <div class="right-col">
         <div class="change down">-0.98%</div>
@@ -464,7 +371,7 @@
         <div class="score-none">-3.0</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('601186')">
+    <li class="stock-item" onclick="showStock('601186')">
       <div class="info"><div class="name">中国铁建 <span class="code">601186</span></div><div class="price">6.30 元</div></div>
       <div class="right-col">
         <div class="change down">-2.78%</div>
@@ -472,61 +379,8 @@
         <div class="score-none">-3.5</div>
       </div>
     </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk00728')">
-      <div class="info"><div class="name">中国电信 <span class="code">hk00728</span></div><div class="price">4.56 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-3.18%</div>
-        <div class="ret down">累-6.17%</div>
-        <div class="score-none">-4.3</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk01810')">
-      <div class="info"><div class="name">小米集团 <span class="code">hk01810</span></div><div class="price">24.58 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-3.30%</div>
-        <div class="ret down">累-6.47%</div>
-        <div class="score-none">-4.5</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk00175')">
-      <div class="info"><div class="name">吉利汽车 <span class="code">hk00175</span></div><div class="price">18.59 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-2.36%</div>
-        <div class="ret down">累-6.96%</div>
-        <div class="score-none">-4.6</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk00857')">
-      <div class="info"><div class="name">中国石油H <span class="code">hk00857</span></div><div class="price">9.18 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-2.79%</div>
-        <div class="ret down">累-7.18%</div>
-        <div class="score-none">-4.9</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk00883')">
-      <div class="info"><div class="name">中国海洋石油 <span class="code">hk00883</span></div><div class="price">22.38 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-2.01%</div>
-        <div class="ret down">累-7.75%</div>
-        <div class="score-none">-5.1</div>
-      </div>
-    </li>
-    <li class="stock-item" style="display:none" onclick="showStock('hk02318')">
-      <div class="info"><div class="name">中国平安H <span class="code">hk02318</span></div><div class="price">53.85 港元</div></div>
-      <div class="right-col">
-        <div class="change down">-4.01%</div>
-        <div class="ret down">累-7.16%</div>
-        <div class="score-none">-5.1</div>
-      </div>
-    </li>
   </ul>
-  <div class="expand-wrap">
-    <button id="expandBtn" class="expand-btn" onclick="expandMore()"
-            data-batch="50" data-shown="20" data-total="35">
-      展开更多 (15/15)
-    </button>
-  </div>
+
 </div>
 
 <div class="footer">
@@ -636,44 +490,6 @@ var stockData = [
   ai_reason: ""
 },
   {
-  code: '300495',
-  name: '美尚生态',
-  price: 0.13,
-  chg_pct: 0.0,
-  unit: '元',
-  score: -2.0,
-  sector: '环保',
-  reason: "🤖 📊 环保行业 股价0.13元 +0.00% PE-0.14 量0手",
-  added_date: '2026-06-05',
-  added_price: 0.13,
-  return_pct: 0.0,
-  high: 0.13,
-  low: 0.13,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk00011',
-  name: '恒生银行',
-  price: 152.4,
-  chg_pct: -0.13,
-  unit: '港元',
-  score: 0.0,
-  sector: '银行',
-  reason: "🤖 📊 银行行业 股价154.3元 +0.00% PE15.72 量0手",
-  added_date: '2026-06-05',
-  added_price: 154.3,
-  return_pct: 0.0,
-  high: 154.3,
-  low: 154.3,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
   code: '300347',
   name: '泰格医药',
   price: 40.12,
@@ -731,25 +547,6 @@ var stockData = [
   ai_reason: ""
 },
   {
-  code: 'hk03988',
-  name: '中国银行H',
-  price: 5.27,
-  chg_pct: -0.94,
-  unit: '港元',
-  score: 35.0,
-  sector: '银行',
-  reason: "🤖 📊 银行行业 股价5.27元 -0.94% PE6.31 量336363117手",
-  added_date: '2026-06-19',
-  added_price: 5.27,
-  return_pct: 0.0,
-  high: 5.27,
-  low: 5.27,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
   code: '000538',
   name: '云南白药',
   price: 48.43,
@@ -763,44 +560,6 @@ var stockData = [
   return_pct: -1.32,
   high: 50.6,
   low: 48.43,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk01299',
-  name: '友邦保险',
-  price: 73.7,
-  chg_pct: -1.8,
-  unit: '港元',
-  score: -2.4,
-  sector: '保险',
-  reason: "🤖 📊 保险行业 股价76.3元 +2.35% PE16.44 量49350046手",
-  added_date: '2026-06-15',
-  added_price: 76.3,
-  return_pct: -3.41,
-  high: 76.5,
-  low: 73.7,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk09988',
-  name: '阿里巴巴',
-  price: 104.9,
-  chg_pct: -1.87,
-  unit: '港元',
-  score: -2.6,
-  sector: '互联网',
-  reason: "🤖 📊 互联网行业 股价108.9元 -1.18% PE17.81 量47703142手",
-  added_date: '2026-06-15',
-  added_price: 108.9,
-  return_pct: -3.67,
-  high: 109.2,
-  low: 104.9,
   ai_rating: '',
   ai_score: 0,
   ai_signal: '',
@@ -826,25 +585,6 @@ var stockData = [
   ai_reason: ""
 },
   {
-  code: 'hk00883',
-  name: '中国海洋石油',
-  price: 22.38,
-  chg_pct: -2.01,
-  unit: '港元',
-  score: -5.1,
-  sector: '能源',
-  reason: "🤖 📊 能源行业 股价24.26元 -2.65% PE8.53 量95373513手",
-  added_date: '2026-06-15',
-  added_price: 24.26,
-  return_pct: -7.75,
-  high: 24.54,
-  low: 22.38,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
   code: '600016',
   name: '民生银行',
   price: 3.48,
@@ -864,25 +604,6 @@ var stockData = [
   ai_reason: ""
 },
   {
-  code: 'hk00175',
-  name: '吉利汽车',
-  price: 18.59,
-  chg_pct: -2.36,
-  unit: '港元',
-  score: -4.6,
-  sector: '汽车',
-  reason: "🤖 📊 汽车行业 股价19.98元 +4.33% PE11.55 量28789433手",
-  added_date: '2026-06-15',
-  added_price: 19.98,
-  return_pct: -6.96,
-  high: 20.06,
-  low: 18.59,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
   code: '600036',
   name: '招商银行',
   price: 37.26,
@@ -896,44 +617,6 @@ var stockData = [
   return_pct: 0.38,
   high: 39.34,
   low: 37.12,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk09999',
-  name: '网易',
-  price: 190.5,
-  chg_pct: -2.56,
-  unit: '港元',
-  score: 2.5,
-  sector: '互联网',
-  reason: "📌 所属互联网行业；综合评分3.4（偏低），需进一步关注；自加入以来累计收益+4.30%，小幅盈利；区间振幅约4.3%（181.50-189.30）",
-  added_date: '2026-05-25',
-  added_price: 181.5,
-  return_pct: 4.96,
-  high: 199.6,
-  low: 181.5,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk01398',
-  name: '工商银行H',
-  price: 6.85,
-  chg_pct: -2.7,
-  unit: '港元',
-  score: 33.8,
-  sector: '银行',
-  reason: "🤖 📊 银行行业 股价6.85元 -2.70% PE5.98 量322999018手",
-  added_date: '2026-06-19',
-  added_price: 6.85,
-  return_pct: 0.0,
-  high: 6.85,
-  low: 6.85,
   ai_rating: '',
   ai_score: 0,
   ai_signal: '',
@@ -1035,82 +718,6 @@ var stockData = [
   ai_reason: ""
 },
   {
-  code: 'hk00857',
-  name: '中国石油H',
-  price: 9.18,
-  chg_pct: -2.79,
-  unit: '港元',
-  score: -4.9,
-  sector: '能源',
-  reason: "🤖 📊 能源行业 股价9.89元 -4.44% PE10.39 量96146365手",
-  added_date: '2026-06-15',
-  added_price: 9.89,
-  return_pct: -7.18,
-  high: 9.97,
-  low: 9.18,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk00728',
-  name: '中国电信',
-  price: 4.56,
-  chg_pct: -3.18,
-  unit: '港元',
-  score: -4.3,
-  sector: '通信',
-  reason: "🤖 📊 通信行业 股价4.86元 -1.02% PE12.10 量40126389手",
-  added_date: '2026-06-15',
-  added_price: 4.86,
-  return_pct: -6.17,
-  high: 4.87,
-  low: 4.56,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk01810',
-  name: '小米集团',
-  price: 24.58,
-  chg_pct: -3.3,
-  unit: '港元',
-  score: -4.5,
-  sector: '消费电子',
-  reason: "🤖 📊 消费电子行业 股价26.28元 +0.31% PE14.73 量52688961手",
-  added_date: '2026-06-15',
-  added_price: 26.28,
-  return_pct: -6.47,
-  high: 26.34,
-  low: 24.58,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk03690',
-  name: '美团',
-  price: 71.8,
-  chg_pct: -3.49,
-  unit: '港元',
-  score: 30.3,
-  sector: '互联网',
-  reason: "🤖 📊 互联网行业 股价71.8元 -3.49% PE-17.15 量68421090手",
-  added_date: '2026-06-19',
-  added_price: 71.8,
-  return_pct: 0.0,
-  high: 71.8,
-  low: 71.8,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
   code: '000776',
   name: '广发证券',
   price: 20.64,
@@ -1124,82 +731,6 @@ var stockData = [
   return_pct: 9.26,
   high: 20.84,
   low: 18.58,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk02318',
-  name: '中国平安H',
-  price: 53.85,
-  chg_pct: -4.01,
-  unit: '港元',
-  score: -5.1,
-  sector: '保险',
-  reason: "🤖 📊 保险行业 股价58.0元 +1.49% PE7.04 量40013837手",
-  added_date: '2026-06-15',
-  added_price: 58.0,
-  return_pct: -7.16,
-  high: 58.0,
-  low: 53.85,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: '601688',
-  name: '华泰证券',
-  price: 19.55,
-  chg_pct: -4.17,
-  unit: '元',
-  score: 4.2,
-  sector: '券商',
-  reason: "📌 入选时券商行业，股价18.04元，-2.43%，PE9.3，量991638手",
-  added_date: '2026-05-29',
-  added_price: 18.04,
-  return_pct: 8.37,
-  high: 20.33,
-  low: 18.04,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk02628',
-  name: '中国人寿H',
-  price: 28.02,
-  chg_pct: -6.6,
-  unit: '港元',
-  score: 32.7,
-  sector: '保险',
-  reason: "🤖 📊 保险行业 股价28.02元 -6.60% PE4.64 量74373740手",
-  added_date: '2026-06-19',
-  added_price: 28.02,
-  return_pct: 0.0,
-  high: 28.02,
-  low: 28.02,
-  ai_rating: '',
-  ai_score: 0,
-  ai_signal: '',
-  ai_reason: ""
-},
-  {
-  code: 'hk01109',
-  name: '华润置地',
-  price: 32.08,
-  chg_pct: -7.34,
-  unit: '港元',
-  score: 31.5,
-  sector: '地产',
-  reason: "🤖 📊 地产行业 股价32.08元 -7.34% PE8.13 量72357279手",
-  added_date: '2026-06-19',
-  added_price: 32.08,
-  return_pct: 0.0,
-  high: 32.08,
-  low: 32.08,
   ai_rating: '',
   ai_score: 0,
   ai_signal: '',
